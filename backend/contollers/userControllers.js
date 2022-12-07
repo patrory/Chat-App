@@ -50,5 +50,21 @@ const authUser = asyncHandler(async (req, res) => {
     throw new Error("Invalid Error Or Password");
   }
 });
-
-module.exports = { registerUser, authUser };
+// api/user/:parameter   with parameer
+// api/user?search = piyush with query
+const allUser = asyncHandler(async (req, res) => {
+  const keyword = req.query.search
+    ? {
+        $or: [
+          { name: { $regex: req.query.search, $options: "i" } },
+          { email: { $regex: req.query.search, $options: "i" } },
+        ],
+      }
+    : {};
+  // console.log(keyword);
+  // pblm  bcoz first the user has to login first then authrize it
+  const users = await User.find(keyword).find({ _id: { $ne: req.user._id } });
+  // const users = await User.find(keyword);
+  res.send(users);
+});
+module.exports = { registerUser, authUser, allUser };
