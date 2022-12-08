@@ -1,18 +1,28 @@
 import {
   Box,
   Container,
-  Text,
-  TabList,
   Tab,
-  TabPanels,
+  TabList,
   TabPanel,
+  TabPanels,
   Tabs,
+  Text,
 } from "@chakra-ui/react";
-import React from "react";
+import { useEffect } from "react";
+import { useHistory } from "react-router";
 import Login from "../component/Authetication/Login";
-import SignUp from "../component/Authetication/SignUp";
+import Signup from "../component/Authetication/Signup";
 
 function Homepage() {
+  const history = useHistory();
+  // check if the user if logged in
+  useEffect(() => {
+    return () => {
+      const user = JSON.parse(localStorage.getItem("userInfo"));
+      if (user) history.push("/chats");
+    };
+  }, [history]);
+
   return (
     <Container maxW="2xl" centerContent>
       <Box
@@ -53,7 +63,7 @@ function Homepage() {
             </TabPanel>
             <TabPanel>
               {" "}
-              <SignUp />{" "}
+              <Signup />{" "}
             </TabPanel>
           </TabPanels>
         </Tabs>

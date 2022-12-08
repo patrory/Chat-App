@@ -1,13 +1,8 @@
-import {
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-  InputGroup,
-  InputRightElement,
-  VStack,
-} from "@chakra-ui/react";
-import React, { useState } from "react";
+import { Button } from "@chakra-ui/button";
+import { FormControl, FormLabel } from "@chakra-ui/form-control";
+import { Input, InputGroup, InputRightElement } from "@chakra-ui/input";
+import { VStack } from "@chakra-ui/layout";
+import { useState } from "react";
 import axios from "axios";
 import { useToast } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom";
@@ -75,6 +70,8 @@ const Login = () => {
       <FormControl id="email" isRequired>
         <FormLabel>Email</FormLabel>
         <Input
+          value={email}
+          type="email"
           placeholder="Enter your name"
           onChange={(e) => setEmail(e.target.value)}
         ></Input>
@@ -84,6 +81,7 @@ const Login = () => {
         <FormLabel>password</FormLabel>
         <InputGroup>
           <Input
+            value={password}
             type={show ? "text" : "password"}
             placeholder="Enter your name"
             onChange={(e) => setPassword(e.target.value)}

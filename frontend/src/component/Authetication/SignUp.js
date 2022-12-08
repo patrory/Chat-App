@@ -1,25 +1,12 @@
-// import {
-//   Button,
-//   FormControl,
-//   FormLabel,
-//   Input,
-//   InputGroup,
-//   InputRightElement,
-//   VStack,
-// } from "@chakra-ui/react";
-// import { useToast } from "@chakra-ui/react";
-// import React, { useState } from "react";
-// import axios from "axios";
-import React from "react";
-import { useState } from "react";
 import { Button } from "@chakra-ui/button";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { Input, InputGroup, InputRightElement } from "@chakra-ui/input";
-import { useToast } from "@chakra-ui/toast";
 import { VStack } from "@chakra-ui/layout";
+import { useToast } from "@chakra-ui/toast";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
-const SignUp = () => {
+import { useState } from "react";
+import { useHistory } from "react-router";
+const Signup = () => {
   const [show, setShow] = useState(false);
   const [name, setName] = useState();
   const [email, setEmail] = useState();
@@ -74,7 +61,7 @@ const SignUp = () => {
     }
   };
 
-  const submitHandler = () => {
+  const submitHandler = async () => {
     setpicLoading(true);
     if (!name || !password || !email || !confirmpasssword) {
       toast({
@@ -101,10 +88,10 @@ const SignUp = () => {
     try {
       const config = {
         headers: {
-          "content-type": "application/json",
+          "Content-type": "application/json",
         },
       };
-      const { data } = axios.post(
+      const { data } = await axios.post(
         "/api/user",
         { name, email, password, pic },
         config
@@ -202,7 +189,7 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Signup;
 // import React from "react";
 // import { useState } from "react";
 // import { Button } from "@chakra-ui/button";
